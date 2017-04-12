@@ -1,12 +1,12 @@
 {
     "NAME":"CSIFreighter",
-    "URL":"https://raw.githubusercontent.com/dboi88/CSI-Cargo-Freighter/master/FOR_RELEASE/GameData/CoyoteSpaceIndustries/Freighter/CSIFreighter.version",
+    "URL":"https://raw.githubusercontent.com/dboi88/CSI-Cargo-Freighter/master/FOR_RELEASE/GameData/CoyoteSpaceIndustries/Freighter/Licence",
     "DOWNLOAD":"https://github.com/dboi88/CSI-Cargo-Freighter",
     "VERSION":
     {
         "MAJOR":0,
         "MINOR":1,
-        "PATCH":3,
+        "PATCH":4,
         "BUILD":0
     },
     "KSP_VERSION":
