@@ -1,14 +1,14 @@
-ship = CargoFreighter Basic
+ship = CSI-CargoFreighter-Basic Build
 version = 1.2.2
 description = 
 type = SPH
-size = 16.038538,13.9085159,100.995712
+size = 16.038538,13.9085159,100.99556
 PART
 {
-	part = CSIfreighterhull_4294613264
+	part = CSIfreighterhull_4294660484
 	partName = Part
-	pos = 0,10,19.6000004
-	attPos = 0,0,19.6000004
+	pos = 0,10,0
+	attPos = 0,0,0
 	attPos0 = 0,10,0
 	rot = 0.707106829,0,0,0.707106829
 	attRot = 0,0,0,1
@@ -27,14 +27,14 @@ PART
 	modCost = 0
 	modMass = 0
 	modSize = 0,0,0
-	link = CSIhangerbay_4294610432
-	link = CSIcommandbridge_4294607754
-	link = CSIreartrussk_4294584168
-	link = CSIevaprep_4294236488
-	attN = TrussNodeB,CSIreartrussk_4294584168
-	attN = AirlockNodeB,CSIevaprep_4294236488
-	attN = CargoBayNodeB,CSIhangerbay_4294610432
-	attN = CommandNodeB,CSIcommandbridge_4294607754
+	link = CSIfreighterevaprep_4294651764
+	link = CSIfreighterreartrussk_4294639884
+	link = CSIfreighterhangerbay_4294655480
+	link = CSIcommandbridge_4294604816
+	attN = TrussNodeB,CSIfreighterreartrussk_4294639884
+	attN = AirlockNodeB,CSIfreighterevaprep_4294651764
+	attN = CargoBayNodeB,CSIfreighterhangerbay_4294655480
+	attN = CommandNodeB,CSIcommandbridge_4294604816
 	EVENTS
 	{
 	}
@@ -258,46 +258,6 @@ PART
 	}
 	MODULE
 	{
-		name = ModuleKerbNetAccess
-		isEnabled = True
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			OpenKerbNetAction
-			{
-				actionGroup = None
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleDataTransmitter
-		isEnabled = True
-		xmitIncomplete = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			StartTransmissionAction
-			{
-				actionGroup = None
-				active = False
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
 		name = ModuleReactionWheel
 		isEnabled = True
 		actuatorModeCycle = 0
@@ -335,7 +295,7 @@ PART
 	{
 		name = ModuleWeightDistributor
 		isEnabled = True
-		transferEnabled = True
+		transferEnabled = False
 		stagingEnabled = True
 		EVENTS
 		{
@@ -387,173 +347,11 @@ PART
 }
 PART
 {
-	part = CSIhangerbay_4294610432
+	part = CSIfreighterevaprep_4294651764
 	partName = Part
-	pos = -6.55072498,10.121212,19.1287823
+	pos = 3.27388954,10.2749062,-43.2096634
 	attPos = 0,0,0
-	attPos0 = -6.55072498,-0.471218586,-0.121211946
-	rot = 0,0,0,1.00000012
-	attRot = -0.707106769,0,0,0.707106769
-	attRot0 = -0.707106829,0,0,0.707106829
-	mir = 1,1,1
-	symMethod = Mirror
-	autostrutMode = Off
-	rigidAttachment = False
-	istg = -1
-	resPri = 0
-	dstg = 0
-	sidx = -1
-	sqor = -1
-	sepI = -1
-	attm = 0
-	modCost = 0
-	modMass = 0
-	modSize = 0,0,0
-	attN = CargoBayNodeA,CSIfreighterhull_4294613264
-	EVENTS
-	{
-	}
-	ACTIONS
-	{
-	}
-	PARTDATA
-	{
-	}
-	MODULE
-	{
-		name = ModuleAnimateGeneric
-		isEnabled = True
-		aniState = LOCKED
-		animSwitch = True
-		animTime = 0
-		animSpeed = 1
-		deployPercent = 100
-		animationIsDisabled = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			ToggleAction
-			{
-				actionGroup = None
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleAnimateGeneric
-		isEnabled = True
-		aniState = LOCKED
-		animSwitch = True
-		animTime = 0
-		animSpeed = 1
-		deployPercent = 100
-		animationIsDisabled = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			ToggleAction
-			{
-				actionGroup = Light
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleCommand
-		isEnabled = True
-		hibernation = False
-		hibernateOnWarp = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			HibernateToggle
-			{
-				actionGroup = None
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleWeightDistributableCargo
-		isEnabled = True
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleLogisticsConsumer
-		isEnabled = True
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = USI_ModuleRecycleablePart
-		isEnabled = True
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	RESOURCE
-	{
-		name = ElectricCharge
-		amount = 5000
-		maxAmount = 5000
-		flowState = True
-		isTweakable = True
-		hideFlow = False
-		isVisible = True
-		flowMode = Both
-	}
-}
-PART
-{
-	part = CSIcommandbridge_4294607754
-	partName = Part
-	pos = 2.11970401,9.93239021,45.9768829
-	attPos = 0,0,0
-	attPos0 = 2.11970401,26.3768177,0.0676059723
+	attPos0 = 3.27388954,-43.2096519,-0.274902344
 	rot = 0.707106829,0,0,0.707106829
 	attRot = 0,0,0,1
 	attRot0 = 0,0,0,1
@@ -571,7 +369,7 @@ PART
 	modCost = 0
 	modMass = 0
 	modSize = 0,0,0
-	attN = CommandNodeA,CSIfreighterhull_4294613264
+	attN = AirlockNodeA,CSIfreighterhull_4294660484
 	EVENTS
 	{
 	}
@@ -580,6 +378,31 @@ PART
 	}
 	PARTDATA
 	{
+	}
+	MODULE
+	{
+		name = ModuleAnimateGeneric
+		isEnabled = True
+		aniState = LOCKED
+		animSwitch = True
+		animTime = 0
+		animSpeed = 1
+		deployPercent = 100
+		animationIsDisabled = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = None
+			}
+		}
+		UPGRADESAPPLIED
+		{
+		}
 	}
 	MODULE
 	{
@@ -619,97 +442,6 @@ PART
 		ACTIONS
 		{
 			HibernateToggle
-			{
-				actionGroup = None
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleSAS
-		isEnabled = True
-		standaloneToggle = True
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleKerbNetAccess
-		isEnabled = True
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			OpenKerbNetAction
-			{
-				actionGroup = None
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleDataTransmitter
-		isEnabled = True
-		xmitIncomplete = False
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			StartTransmissionAction
-			{
-				actionGroup = None
-				active = False
-			}
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
-		name = ModuleReactionWheel
-		isEnabled = True
-		actuatorModeCycle = 0
-		authorityLimiter = 100
-		stateString = Active
-		stagingEnabled = True
-		WheelState = Active
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-			CycleAction
-			{
-				actionGroup = None
-			}
-			Activate
-			{
-				actionGroup = None
-			}
-			Deactivate
-			{
-				actionGroup = None
-			}
-			Toggle
 			{
 				actionGroup = None
 			}
@@ -765,7 +497,7 @@ PART
 	}
 	MODULE
 	{
-		name = ModuleTripLogger
+		name = ModuleLifeSupport
 		isEnabled = True
 		stagingEnabled = True
 		EVENTS
@@ -774,9 +506,20 @@ PART
 		ACTIONS
 		{
 		}
-		Log
+		UPGRADESAPPLIED
 		{
-			flight = 0
+		}
+	}
+	MODULE
+	{
+		name = USI_ModuleFieldRepair
+		isEnabled = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
 		}
 		UPGRADESAPPLIED
 		{
@@ -793,12 +536,23 @@ PART
 		isVisible = True
 		flowMode = Both
 	}
+	RESOURCE
+	{
+		name = ReplacementParts
+		amount = 100
+		maxAmount = 100
+		flowState = True
+		isTweakable = False
+		hideFlow = False
+		isVisible = False
+		flowMode = Both
+	}
 }
 PART
 {
-	part = CSIreartrussk_4294584168
+	part = CSIfreighterreartrussk_4294639884
 	partName = Part
-	pos = 2.61748481,10.2734184,-24.0148067
+	pos = 2.61748481,10.2734184,-43.6147537
 	attPos = 0,0,0
 	attPos0 = 2.61748481,-43.6147423,-0.273414612
 	rot = 0,0,0,1.00000012
@@ -818,9 +572,9 @@ PART
 	modCost = 0
 	modMass = 0
 	modSize = 0,0,0
-	link = CISfreighterengine_4294126660
-	attN = EngineNodeA,CISfreighterengine_4294126660
-	attN = TrussNodeA,CSIfreighterhull_4294613264
+	link = CISfreighterengine_4294612740
+	attN = EngineNodeA,CISfreighterengine_4294612740
+	attN = TrussNodeA,CSIfreighterhull_4294660484
 	EVENTS
 	{
 	}
@@ -995,7 +749,7 @@ PART
 	{
 		name = ModuleWeightDistributor
 		isEnabled = True
-		transferEnabled = True
+		transferEnabled = False
 		stagingEnabled = True
 		EVENTS
 		{
@@ -1036,11 +790,11 @@ PART
 }
 PART
 {
-	part = CISfreighterengine_4294126660
+	part = CISfreighterengine_4294612740
 	partName = Part
-	pos = -3.3382051,8.51965332,-45.522995
+	pos = -3.3382051,8.51965332,-65.1229019
 	attPos = 0,0,0
-	attPos0 = -5.95568991,-1.75376701,-21.5081234
+	attPos0 = -5.95568991,-1.75376701,-21.508131
 	rot = 0.707106888,0,0,0.707106888
 	attRot = 0,0,0,1
 	attRot0 = 0.707106829,0,0,0.707106829
@@ -1058,7 +812,7 @@ PART
 	modCost = 0
 	modMass = 0
 	modSize = 0,0,0
-	attN = EngineNodeB,CSIreartrussk_4294584168
+	attN = EngineNodeB,CSIfreighterreartrussk_4294639884
 	EVENTS
 	{
 	}
@@ -1129,6 +883,21 @@ PART
 	}
 	MODULE
 	{
+		name = ModuleWeightDistributableCargo
+		isEnabled = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
 		name = USI_ModuleRecycleablePart
 		isEnabled = True
 		stagingEnabled = True
@@ -1156,14 +925,14 @@ PART
 }
 PART
 {
-	part = CSIevaprep_4294236488
+	part = CSIfreighterhangerbay_4294655480
 	partName = Part
-	pos = 3.27388954,10.2749062,-23.6096706
-	attPos = 0,0,0
-	attPos0 = 3.27388954,-43.2096519,-0.274902344
-	rot = 0.707106829,0,0,0.707106829
-	attRot = 0,0,0,1
-	attRot0 = 0,0,0,1
+	pos = -6.55072498,10.121212,-0.471218228
+	attPos = -0.0492749214,5.47121906,-0.0787883401
+	attPos0 = -6.55072498,-0.471218169,-0.121211946
+	rot = 0,0,0,1.00000012
+	attRot = -0.707106769,0,0,0.707106769
+	attRot0 = -0.707106829,0,0,0.707106829
 	mir = 1,1,1
 	symMethod = Mirror
 	autostrutMode = Off
@@ -1178,7 +947,7 @@ PART
 	modCost = 0
 	modMass = 0
 	modSize = 0,0,0
-	attN = AirlockNodeA,CSIfreighterhull_4294613264
+	attN = CargoBayNodeA,CSIfreighterhull_4294660484
 	EVENTS
 	{
 	}
@@ -1195,7 +964,7 @@ PART
 		aniState = LOCKED
 		animSwitch = True
 		animTime = 0
-		animSpeed = -78.75
+		animSpeed = 1
 		deployPercent = 100
 		animationIsDisabled = False
 		stagingEnabled = True
@@ -1218,9 +987,9 @@ PART
 		name = ModuleAnimateGeneric
 		isEnabled = True
 		aniState = LOCKED
-		animSwitch = False
-		animTime = 1
-		animSpeed = 20
+		animSwitch = True
+		animTime = 0
+		animSpeed = 1
 		deployPercent = 100
 		animationIsDisabled = False
 		stagingEnabled = True
@@ -1254,6 +1023,199 @@ PART
 			{
 				actionGroup = None
 			}
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleWeightDistributableCargo
+		isEnabled = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleLogisticsConsumer
+		isEnabled = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = USI_ModuleRecycleablePart
+		isEnabled = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleLifeSupport
+		isEnabled = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = USI_ModuleFieldRepair
+		isEnabled = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	RESOURCE
+	{
+		name = ElectricCharge
+		amount = 5000
+		maxAmount = 5000
+		flowState = True
+		isTweakable = True
+		hideFlow = False
+		isVisible = True
+		flowMode = Both
+	}
+	RESOURCE
+	{
+		name = ReplacementParts
+		amount = 100
+		maxAmount = 100
+		flowState = True
+		isTweakable = False
+		hideFlow = False
+		isVisible = False
+		flowMode = Both
+	}
+}
+PART
+{
+	part = CSIcommandbridge_4294604816
+	partName = Part
+	pos = 2.11970401,9.93239021,26.3768215
+	attPos = 0,0,0
+	attPos0 = 2.11970401,26.3768177,0.0676059723
+	rot = 0.707106829,0,0,0.707106829
+	attRot = 0,0,0,1
+	attRot0 = 0,0,0,1
+	mir = 1,1,1
+	symMethod = Mirror
+	autostrutMode = Off
+	rigidAttachment = False
+	istg = -1
+	resPri = 0
+	dstg = 0
+	sidx = -1
+	sqor = -1
+	sepI = -1
+	attm = 0
+	modCost = 0
+	modMass = 0
+	modSize = 0,0,0
+	attN = CommandNodeA,CSIfreighterhull_4294660484
+	EVENTS
+	{
+	}
+	ACTIONS
+	{
+	}
+	PARTDATA
+	{
+	}
+	MODULE
+	{
+		name = ModuleAnimateGeneric
+		isEnabled = True
+		aniState = LOCKED
+		animSwitch = True
+		animTime = 0
+		animSpeed = 1
+		deployPercent = 100
+		animationIsDisabled = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+			ToggleAction
+			{
+				actionGroup = Light
+			}
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleCommand
+		isEnabled = True
+		hibernation = False
+		hibernateOnWarp = False
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+			HibernateToggle
+			{
+				actionGroup = None
+			}
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleWeightDistributableCargo
+		isEnabled = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
 		}
 		UPGRADESAPPLIED
 		{
@@ -1352,21 +1314,6 @@ PART
 	}
 	MODULE
 	{
-		name = ModuleWeightDistributableCargo
-		isEnabled = True
-		stagingEnabled = True
-		EVENTS
-		{
-		}
-		ACTIONS
-		{
-		}
-		UPGRADESAPPLIED
-		{
-		}
-	}
-	MODULE
-	{
 		name = ModuleLogisticsConsumer
 		isEnabled = True
 		stagingEnabled = True
@@ -1395,6 +1342,55 @@ PART
 		{
 		}
 	}
+	MODULE
+	{
+		name = ModuleLifeSupport
+		isEnabled = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = USI_ModuleFieldRepair
+		isEnabled = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
+	MODULE
+	{
+		name = ModuleTripLogger
+		isEnabled = True
+		stagingEnabled = True
+		EVENTS
+		{
+		}
+		ACTIONS
+		{
+		}
+		Log
+		{
+			flight = 0
+		}
+		UPGRADESAPPLIED
+		{
+		}
+	}
 	RESOURCE
 	{
 		name = ElectricCharge
@@ -1404,6 +1400,17 @@ PART
 		isTweakable = True
 		hideFlow = False
 		isVisible = True
+		flowMode = Both
+	}
+	RESOURCE
+	{
+		name = ReplacementParts
+		amount = 800
+		maxAmount = 800
+		flowState = True
+		isTweakable = False
+		hideFlow = False
+		isVisible = False
 		flowMode = Both
 	}
 }
