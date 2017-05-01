@@ -5,11 +5,16 @@
   "VERSION": {
     "MAJOR": 0,
 <<<<<<< HEAD
+<<<<<<< HEAD
     "MINOR": 2,
     "PATCH": 0
 =======
     "MINOR": 1,
     "PATCH": 7
+>>>>>>> origin/master
+=======
+    "MINOR": 2,
+    "PATCH": 0
 >>>>>>> origin/master
   },
  "KSP_VERSION":{
