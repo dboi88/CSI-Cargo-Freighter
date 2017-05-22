@@ -1,0 +1,8 @@
+C:\Users\Winston\Documents\AnimatedDocking\CSI Tools\bin\Debug\CSITools.dll
+C:\Users\Winston\Documents\AnimatedDocking\CSI Tools\bin\Debug\CSITools.pdb
+C:\Users\Winston\Documents\AnimatedDocking\CSI Tools\bin\Debug\Assembly-CSharp-firstpass.dll
+C:\Users\Winston\Documents\AnimatedDocking\CSI Tools\bin\Debug\UnityEngine.UI.dll
+C:\Users\Winston\Documents\AnimatedDocking\CSI Tools\bin\Debug\KSPAssets.dll
+C:\Users\Winston\Documents\AnimatedDocking\CSI Tools\obj\Debug\CSITools.csprojResolveAssemblyReference.cache
+C:\Users\Winston\Documents\AnimatedDocking\CSI Tools\obj\Debug\CSITools.dll
+C:\Users\Winston\Documents\AnimatedDocking\CSI Tools\obj\Debug\CSITools.pdb
