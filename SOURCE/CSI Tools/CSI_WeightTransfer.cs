@@ -11,11 +11,14 @@ namespace CSITools
         
         ///Set part physics significane Full
         public override void OnStart(StartState state)
-        {
+        {   
+            /// Set part significance to Full
             part.physicalSignificance = Part.PhysicalSignificance.FULL;
         }
-
+        
+        /// create counter variable
         private int counter = 0;
+        ///runs automtacially on every physics tick
         public void FixedUpdate()
         {
 
@@ -29,7 +32,8 @@ namespace CSITools
                 trusschecker();
                 counter = 0;
         }
-
+        
+        /// Checks to see if the truss is attached if Parent != Null, Amend _trussattached then runs weight transfer
         private void trusschecker()
         {
             if (part.parent != null)
