@@ -1,7 +1,9 @@
 ﻿using System;
 using KSP;
 
-
+/// <summary>
+/// test
+/// </summary>
 namespace CSITools
 {
     public class CSI_AutoStrut : PartModule
