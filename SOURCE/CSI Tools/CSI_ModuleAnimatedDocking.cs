@@ -42,7 +42,7 @@ namespace CSITools
         }
         private void OnDestroy()
         {
-            GameEvents.onPartCouple.Add(this.onPartCouple);
+            GameEvents.onPartCouple.Remove(this.onPartCouple);
             GameEvents.onPartUndock.Remove(this.onPartUndock);
         }
     }
