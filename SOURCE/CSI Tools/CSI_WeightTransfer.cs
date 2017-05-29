@@ -7,6 +7,9 @@ namespace CSITools
 {
     public class CSI_WeightTransfer : PartModule 
     {
+        [KSPField]
+        public bool autostrut = false;
+
         private bool _trussattached = false;
         public override void OnStart(StartState state)
         {
@@ -88,6 +91,11 @@ namespace CSITools
             {
                 getparentworldcom();
                 part.CoMOffset = kontainerlocal;
+                if (autostrut)
+                {
+                    part.autoStrutMode = Part.AutoStrutMode.Grandparent;
+                    part.UpdateAutoStrut();
+                }
                 if (Tools._debug == true)
                 {
                     Tools.LogFormatted("COM Set Parent");
@@ -95,6 +103,11 @@ namespace CSITools
             }
             if (_trussattached == false)
             {
+                if (autostrut)
+                {
+                    part.autoStrutMode = Part.AutoStrutMode.Off;
+                    part.UpdateAutoStrut();
+                }
                 part.CoMOffset = Vector3d.zero;
                 if (Tools._debug == true)
                 {
@@ -173,7 +186,7 @@ namespace CSITools
             attachcounter = 1;
         }
 
-        private void onDestroy()
+        public void OnDestroy()
         {
             GameEvents.onPartAttach.Remove(onPartAttach);
             GameEvents.onPartCouple.Remove(onPartCouple);
