@@ -5,13 +5,16 @@ using System.Text;
 
 namespace CSITools
 {
-    class Tools
+    public class Tools : MonoUtilities
     {
+        public static bool _debug = true;
+
         /// <summary>
         /// Name of the Assembly that is running this 
         /// </summary>
         internal static String _AssemblyName
         { get { return System.Reflection.Assembly.GetExecutingAssembly().GetName().Name; } }
+
         /// <summary>
         /// Some Structured logging to the debug file
         /// </summary>
