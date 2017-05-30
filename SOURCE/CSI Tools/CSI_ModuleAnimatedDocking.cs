@@ -28,17 +28,30 @@ namespace CSITools
         }
         private void onPartCouple(GameEvents.FromToAction<Part, Part> action)
         {
-            if (action.to == base.part)
+            var animationstate = module.GetState();
+            if (animationstate.normalizedTime == 1f)
             {
-                module.Toggle();
+                return;
             }
-        }
-        private void onPartUndock(Part part)
-        {
-            if (part = base.part)
+            if (action.to == base.part || action.from == part)
             {
                 this.module.Toggle();
             }
+        }
+
+        /// AnimationState ModuleAnimateGeneric.GetState	(		)	
+        private void onPartUndock(Part part)
+        {
+            var animationstate = module.GetState();
+            if (animationstate.normalizedTime == 0f)
+            {
+                return;
+            }
+            if (part == base.part)
+            {
+                this.module.Toggle();
+            }
+
         }
         private void OnDestroy()
         {

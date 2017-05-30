@@ -39,7 +39,10 @@ namespace CSITools
             }
             else
             {
-                Tools.LogFormatted("Run Attach Counter");
+                if (Tools._debug == true)
+                {
+                    Tools.LogFormatted("Run Attach Counter");
+                }
                 trusschecker();
                 attachcounter = 0;
             }

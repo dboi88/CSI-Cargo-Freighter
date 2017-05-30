@@ -7,7 +7,7 @@ namespace CSITools
 {
     public class Tools : MonoUtilities
     {
-        public static bool _debug = true;
+        public static bool _debug = false;
 
         /// <summary>
         /// Name of the Assembly that is running this 
