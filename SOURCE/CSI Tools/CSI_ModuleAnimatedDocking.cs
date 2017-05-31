@@ -8,40 +8,110 @@ namespace CSITools
     {
         [KSPField]
         public string animationName = "";
+        [KSPField]
+        public bool dockAnimationController = false;
+        [KSPField]
+        public string referenceAttachNode = "";
+        [KSPField]
+        public bool armAnimationController = false;
+        [KSPField]
+        public string armAnimation = "";
+        [KSPEvent(guiName = "Disarm", active = false, guiActive = true, guiActiveEditor = true)]
+        public void Disarm()
+        {
+            ToggleArm(false);
+        }
+        [KSPEvent(guiName = "Arm", active = false, guiActive = true, guiActiveEditor = true)]
+        public void Arm()
+        {
+            ToggleArm(true);
+        }
 
         private ModuleAnimateGeneric module;
+        private ModuleAnimateGeneric armmodule;
+        private PartModule dockingmodule;
 
         public override void OnStart(StartState state)
         {
             base.OnStart(state);
-            foreach (ModuleAnimateGeneric m in base.part.FindModulesImplementing<ModuleAnimateGeneric>())
+            foreach (ModuleDockingNode d in part.FindModulesImplementing<ModuleDockingNode>())
             {
-                if (m.animationName == this.animationName)
+                if (d.referenceAttachNode == referenceAttachNode)
                 {
-                    this.module = m;
+                    dockingmodule = d;
                     break;
                 }
             }
-            if (this.module == null) return;
-            GameEvents.onPartCouple.Add(this.onPartCouple);
-            GameEvents.onPartUndock.Add(this.onPartUndock);
+            foreach (ModuleAnimateGeneric m in part.FindModulesImplementing<ModuleAnimateGeneric>())
+            {
+                if (m.animationName == animationName)
+                {
+                    module = m;
+                    break;
+                }
+            }
+            foreach (ModuleAnimateGeneric n in part.FindModulesImplementing<ModuleAnimateGeneric>())
+            {
+                if (n.animationName == armAnimation)
+                {
+                    armmodule = n;
+                }
+            }
+            if (module != null)
+            {
+                GameEvents.onPartCouple.Add(onPartCouple);
+                GameEvents.onPartUndock.Add(onPartUndock);
+            }
+            if (!armAnimationController)
+            {
+                Events["Disarm"].active = false;
+                Events["Arm"].active = false;
+            }
+            if (armAnimationController) ToggleArm(false);
+
+
         }
+
+        private void ToggleArm(bool state)
+        {
+            Events["Disarm"].active = state;
+            Events["Arm"].active = !state;
+            if (!state)
+            {
+                var animationstate = armmodule.GetState();
+                var animationstate1 = module.GetState();
+                if (animationstate.normalizedTime == 0f) armmodule.Toggle();
+                if (animationstate1.normalizedTime == 0f) module.Toggle();
+                dockingmodule.isEnabled = false;
+            }
+            if (state)
+            {
+                var animationstate = armmodule.GetState();
+                var animationstate1 = module.GetState();
+                if (animationstate.normalizedTime == 1f) armmodule.Toggle();
+                if (animationstate1.normalizedTime == 1f) module.Toggle();
+                dockingmodule.isEnabled = true;
+            }
+            MonoUtilities.RefreshContextWindows(part);
+        }
+
         private void onPartCouple(GameEvents.FromToAction<Part, Part> action)
         {
+            Events["Disarm"].active = false;
             var animationstate = module.GetState();
             if (animationstate.normalizedTime == 1f)
             {
                 return;
             }
-            if (action.to == base.part || action.from == part)
+            if (action.to == part || action.from == part)
             {
-                this.module.Toggle();
+                module.Toggle();
             }
         }
 
-        /// AnimationState ModuleAnimateGeneric.GetState	(		)	
         private void onPartUndock(Part part)
         {
+            Events["Arm"].active = true;
             var animationstate = module.GetState();
             if (animationstate.normalizedTime == 0f)
             {
@@ -49,14 +119,14 @@ namespace CSITools
             }
             if (part == base.part)
             {
-                this.module.Toggle();
+                module.Toggle();
             }
 
         }
         private void OnDestroy()
         {
-            GameEvents.onPartCouple.Remove(this.onPartCouple);
-            GameEvents.onPartUndock.Remove(this.onPartUndock);
+            GameEvents.onPartCouple.Remove(onPartCouple);
+            GameEvents.onPartUndock.Remove(onPartUndock);
         }
     }
 }
