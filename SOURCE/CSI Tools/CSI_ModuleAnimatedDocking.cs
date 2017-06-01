@@ -30,6 +30,7 @@ namespace CSITools
         private ModuleAnimateGeneric module;
         private ModuleAnimateGeneric armmodule;
         private PartModule dockingmodule;
+        private bool _checkattachnode;
 
         public override void OnStart(StartState state)
         {
@@ -67,9 +68,15 @@ namespace CSITools
                 Events["Disarm"].active = false;
                 Events["Arm"].active = false;
             }
+            module.Toggle();
+            //armmodule.Toggle();
             if (armAnimationController) ToggleArm(false);
 
 
+        }
+
+        private void onUpdate()
+        {
         }
 
         private void ToggleArm(bool state)
@@ -80,16 +87,16 @@ namespace CSITools
             {
                 var animationstate = armmodule.GetState();
                 var animationstate1 = module.GetState();
-                if (animationstate.normalizedTime == 0f) armmodule.Toggle();
-                if (animationstate1.normalizedTime == 0f) module.Toggle();
+                //if (animationstate1.normalizedTime == 1f) module.Toggle();
+                if (animationstate.normalizedTime == 1f) armmodule.Toggle();
                 dockingmodule.isEnabled = false;
             }
             if (state)
             {
                 var animationstate = armmodule.GetState();
                 var animationstate1 = module.GetState();
-                if (animationstate.normalizedTime == 1f) armmodule.Toggle();
-                if (animationstate1.normalizedTime == 1f) module.Toggle();
+                if (animationstate.normalizedTime == 0f) armmodule.Toggle();
+                //if (animationstate1.normalizedTime == 1f) module.Toggle();
                 dockingmodule.isEnabled = true;
             }
             MonoUtilities.RefreshContextWindows(part);
@@ -99,7 +106,7 @@ namespace CSITools
         {
             Events["Disarm"].active = false;
             var animationstate = module.GetState();
-            if (animationstate.normalizedTime == 1f)
+            if (animationstate.normalizedTime == 0f)
             {
                 return;
             }
@@ -113,16 +120,17 @@ namespace CSITools
         {
             Events["Arm"].active = true;
             var animationstate = module.GetState();
-            if (animationstate.normalizedTime == 0f)
+            if (animationstate.normalizedTime == 1f)
             {
                 return;
             }
-            if (part == base.part)
+            if (this.part == base.part)
             {
                 module.Toggle();
             }
 
         }
+
         private void OnDestroy()
         {
             GameEvents.onPartCouple.Remove(onPartCouple);
