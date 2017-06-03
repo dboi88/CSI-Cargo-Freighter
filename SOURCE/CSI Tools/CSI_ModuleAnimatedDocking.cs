@@ -13,28 +13,16 @@ namespace CSITools
         [KSPField]
         public string referenceAttachNode = "";
         [KSPField]
-        public bool armAnimationController = false;
-        [KSPField]
         public string armAnimation = "";
-        [KSPEvent(guiName = "Disarm", active = false, guiActive = true, guiActiveEditor = true)]
-        public void Disarm()
-        {
-            ToggleArm(false);
-        }
-        [KSPEvent(guiName = "Arm", active = false, guiActive = true, guiActiveEditor = true)]
-        public void Arm()
-        {
-            ToggleArm(true);
-        }
+ 
+        
 
         private ModuleAnimateGeneric module;
-        private ModuleAnimateGeneric armmodule;
         private PartModule dockingmodule;
-        private bool _checkattachnode;
 
         public override void OnStart(StartState state)
         {
-            base.OnStart(state);
+            Tools.LogFormatted("OnStart");
             foreach (ModuleDockingNode d in part.FindModulesImplementing<ModuleDockingNode>())
             {
                 if (d.referenceAttachNode == referenceAttachNode)
@@ -51,62 +39,23 @@ namespace CSITools
                     break;
                 }
             }
-            foreach (ModuleAnimateGeneric n in part.FindModulesImplementing<ModuleAnimateGeneric>())
-            {
-                if (n.animationName == armAnimation)
-                {
-                    armmodule = n;
-                }
-            }
             if (module != null)
             {
                 GameEvents.onPartCouple.Add(onPartCouple);
                 GameEvents.onPartUndock.Add(onPartUndock);
             }
-            if (!armAnimationController)
-            {
-                Events["Disarm"].active = false;
-                Events["Arm"].active = false;
-            }
-            module.Toggle();
-            //armmodule.Toggle();
-            if (armAnimationController) ToggleArm(false);
-
-
         }
 
         private void onUpdate()
         {
         }
 
-        private void ToggleArm(bool state)
-        {
-            Events["Disarm"].active = state;
-            Events["Arm"].active = !state;
-            if (!state)
-            {
-                var animationstate = armmodule.GetState();
-                var animationstate1 = module.GetState();
-                //if (animationstate1.normalizedTime == 1f) module.Toggle();
-                if (animationstate.normalizedTime == 1f) armmodule.Toggle();
-                dockingmodule.isEnabled = false;
-            }
-            if (state)
-            {
-                var animationstate = armmodule.GetState();
-                var animationstate1 = module.GetState();
-                if (animationstate.normalizedTime == 0f) armmodule.Toggle();
-                //if (animationstate1.normalizedTime == 1f) module.Toggle();
-                dockingmodule.isEnabled = true;
-            }
-            MonoUtilities.RefreshContextWindows(part);
-        }
+        
 
         private void onPartCouple(GameEvents.FromToAction<Part, Part> action)
         {
-            Events["Disarm"].active = false;
             var animationstate = module.GetState();
-            if (animationstate.normalizedTime == 0f)
+            if (animationstate.normalizedTime == 1f)
             {
                 return;
             }
@@ -118,9 +67,8 @@ namespace CSITools
 
         private void onPartUndock(Part part)
         {
-            Events["Arm"].active = true;
             var animationstate = module.GetState();
-            if (animationstate.normalizedTime == 1f)
+            if (animationstate.normalizedTime == 0f)
             {
                 return;
             }
