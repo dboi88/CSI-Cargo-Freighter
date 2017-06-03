@@ -8,42 +8,81 @@ namespace CSITools
     {
         [KSPField]
         public string animationName = "";
+        [KSPField]
+        public bool dockAnimationController = false;
+        [KSPField]
+        public string referenceAttachNode = "";
+        [KSPField]
+        public string armAnimation = "";
+ 
+        
 
         private ModuleAnimateGeneric module;
+        private PartModule dockingmodule;
 
         public override void OnStart(StartState state)
         {
-            base.OnStart(state);
-            foreach (ModuleAnimateGeneric m in base.part.FindModulesImplementing<ModuleAnimateGeneric>())
+            Tools.LogFormatted("OnStart");
+            foreach (ModuleDockingNode d in part.FindModulesImplementing<ModuleDockingNode>())
             {
-                if (m.animationName == this.animationName)
+                if (d.referenceAttachNode == referenceAttachNode)
                 {
-                    this.module = m;
+                    dockingmodule = d;
                     break;
                 }
             }
-            if (this.module == null) return;
-            GameEvents.onPartCouple.Add(this.onPartCouple);
-            GameEvents.onPartUndock.Add(this.onPartUndock);
+            foreach (ModuleAnimateGeneric m in part.FindModulesImplementing<ModuleAnimateGeneric>())
+            {
+                if (m.animationName == animationName)
+                {
+                    module = m;
+                    break;
+                }
+            }
+            if (module != null)
+            {
+                GameEvents.onPartCouple.Add(onPartCouple);
+                GameEvents.onPartUndock.Add(onPartUndock);
+            }
         }
+
+        private void onUpdate()
+        {
+        }
+
+        
+
         private void onPartCouple(GameEvents.FromToAction<Part, Part> action)
         {
-            if (action.to == base.part)
+            var animationstate = module.GetState();
+            if (animationstate.normalizedTime == 1f)
+            {
+                return;
+            }
+            if (action.to == part || action.from == part)
             {
                 module.Toggle();
             }
         }
+
         private void onPartUndock(Part part)
         {
-            if (part = base.part)
+            var animationstate = module.GetState();
+            if (animationstate.normalizedTime == 0f)
             {
-                this.module.Toggle();
+                return;
             }
+            if (this.part == base.part)
+            {
+                module.Toggle();
+            }
+
         }
+
         private void OnDestroy()
         {
-            GameEvents.onPartCouple.Add(this.onPartCouple);
-            GameEvents.onPartUndock.Remove(this.onPartUndock);
+            GameEvents.onPartCouple.Remove(onPartCouple);
+            GameEvents.onPartUndock.Remove(onPartUndock);
         }
     }
 }

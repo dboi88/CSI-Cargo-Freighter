@@ -10,3 +10,4 @@ C:\Users\Winston\Documents\Freighter\GitHub\CSI-Cargo-Freighter\SOURCE\CSI Tools
 C:\Users\Winston\Documents\Freighter\GitHub\CSI-Cargo-Freighter\SOURCE\CSI Tools\bin\Debug\CSITools.pdb
 C:\Users\Winston\Documents\Freighter\GitHub\CSI-Cargo-Freighter\SOURCE\CSI Tools\obj\Debug\CSITools.dll
 C:\Users\Winston\Documents\Freighter\GitHub\CSI-Cargo-Freighter\SOURCE\CSI Tools\obj\Debug\CSITools.pdb
+C:\Users\Winston\Documents\Freighter\GitHub\CSI-Cargo-Freighter\SOURCE\CSI Tools\obj\Debug\CSITools.csprojResolveAssemblyReference.cache
